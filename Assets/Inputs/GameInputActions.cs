@@ -49,6 +49,14 @@ public class @GameInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""9c7ba509-f55d-4ff9-a3fd-cae1a30ba115"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""NormalizeVector2"",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -139,6 +147,17 @@ public class @GameInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4490f2bd-57ec-40ec-929a-c9412c7f1a2d"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -168,6 +187,7 @@ public class @GameInputActions : IInputActionCollection, IDisposable
         m_ThirdPerson_Jump = m_ThirdPerson.FindAction("Jump", throwIfNotFound: true);
         m_ThirdPerson_Fire = m_ThirdPerson.FindAction("Fire", throwIfNotFound: true);
         m_ThirdPerson_Run = m_ThirdPerson.FindAction("Run", throwIfNotFound: true);
+        m_ThirdPerson_Look = m_ThirdPerson.FindAction("Look", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -221,6 +241,7 @@ public class @GameInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_ThirdPerson_Jump;
     private readonly InputAction m_ThirdPerson_Fire;
     private readonly InputAction m_ThirdPerson_Run;
+    private readonly InputAction m_ThirdPerson_Look;
     public struct ThirdPersonActions
     {
         private @GameInputActions m_Wrapper;
@@ -229,6 +250,7 @@ public class @GameInputActions : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_ThirdPerson_Jump;
         public InputAction @Fire => m_Wrapper.m_ThirdPerson_Fire;
         public InputAction @Run => m_Wrapper.m_ThirdPerson_Run;
+        public InputAction @Look => m_Wrapper.m_ThirdPerson_Look;
         public InputActionMap Get() { return m_Wrapper.m_ThirdPerson; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -250,6 +272,9 @@ public class @GameInputActions : IInputActionCollection, IDisposable
                 @Run.started -= m_Wrapper.m_ThirdPersonActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_ThirdPersonActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_ThirdPersonActionsCallbackInterface.OnRun;
+                @Look.started -= m_Wrapper.m_ThirdPersonActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_ThirdPersonActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_ThirdPersonActionsCallbackInterface.OnLook;
             }
             m_Wrapper.m_ThirdPersonActionsCallbackInterface = instance;
             if (instance != null)
@@ -266,6 +291,9 @@ public class @GameInputActions : IInputActionCollection, IDisposable
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
             }
         }
     }
@@ -285,5 +313,6 @@ public class @GameInputActions : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }
