@@ -1,16 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Weapons;
+
 public class PlayerEvents
-{ 
+{
+    public delegate void OnWeaponEquippedEvent(WeaponComponent weaponComponent);
 
-    public delegate void WeaponEquipped(bool enable);
+    public static event OnWeaponEquippedEvent OnWeaponEquipped;
 
-    public static event WeaponEquipped OnWeaponEquipped;
-
-    public static void Invoke_OnWeaponEquipped(WeaponComponent weapon)
+    public static void Invoke_OnWeaponEquipped(WeaponComponent weaponComponent)
     {
-        OnWeaponEquipped?.Invoke(weapon);
+        OnWeaponEquipped?.Invoke(weaponComponent);
     }
 }
