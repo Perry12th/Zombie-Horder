@@ -215,6 +215,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &713159745 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1750875110, guid: d1c1fcdaf9bd7c145a33af425d3befa5, type: 3}
+  m_PrefabInstance: {fileID: 973505648}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &887036901
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,6 +628,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Character
       objectReference: {fileID: 0}
+    - target: {fileID: 3577777986647810645, guid: d1c1fcdaf9bd7c145a33af425d3befa5, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3988723038579308963, guid: d1c1fcdaf9bd7c145a33af425d3befa5, type: 3}
       propertyPath: CrosshairScript
       value: 
@@ -642,6 +651,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1874484302572197169, guid: d1c1fcdaf9bd7c145a33af425d3befa5, type: 3}
   m_PrefabInstance: {fileID: 973505648}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1043778217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3526702093224946357, guid: d1c1fcdaf9bd7c145a33af425d3befa5, type: 3}
+  m_PrefabInstance: {fileID: 973505648}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1043778218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043778217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f6337bde5a6f34fa32c1ccf5612e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FollowTarget: {fileID: 713159745}
+  RotationSpeed: 0.1
+  HorizontalDamping: 20
 --- !u!1 &1160976615
 GameObject:
   m_ObjectHideFlags: 0
