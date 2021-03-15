@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Health;
 
 namespace Weapons
 {
@@ -30,6 +31,8 @@ namespace Weapons
             
                 Vector3 hitDirection = hit.point - MainCamera.transform.position;
                 Debug.DrawRay(MainCamera.transform.position, hitDirection.normalized * WeaponStats.FireDistance, Color.red);
+
+                DamageTarget(hit);
             }
             else if(WeaponStats.BulletsInClip <= 0)
             {
@@ -39,6 +42,12 @@ namespace Weapons
             }
 
           
+        }
+
+        private void DamageTarget(RaycastHit hit)
+        {
+            IDamagable damagable = hit.collider.GetComponent<IDamagable>();
+            damagable?.TakeDamage(WeaponInformation.Damage);
         }
 
         private void OnDrawGizmos()
