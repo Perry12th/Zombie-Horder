@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Character
 {
-   public class CameraScript : InputMonoBehaviour
+   public class CameraScript : InputMonoBehaviour, IPausable
    {
       [SerializeField] private float RotationPower = 10;
       [SerializeField] private float HorizontalDamping = 1;
@@ -49,8 +49,16 @@ namespace Character
          GameInput.PlayerActionMap.Look.performed -= OnLooked;
    
       }
-      
-         
-   }
+
+        public void PauseGame()
+        {
+            GameInput.PlayerActionMap.Look.performed -= OnLooked;
+        }
+
+        public void UnPauseGame()
+        {
+            GameInput.PlayerActionMap.Look.performed += OnLooked;
+        }
+    }
 }
    

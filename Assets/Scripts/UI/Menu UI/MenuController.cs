@@ -95,6 +95,8 @@ public abstract class MenuWidget : MonoBehaviour
         {
             Debug.LogError("Message Controller not found");
         }
+
+        AppEvents.Invoke_OnMouseCursorEnable(true);
     }
 
     public void ReturnToRootMenu()

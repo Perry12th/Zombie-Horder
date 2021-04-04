@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f465ae816390a2488a14e53e2ef8ddf, type: 3}
+  m_Name: Potion
+  m_EditorClassIdentifier: 
+  Name: Item
+  ItemCategory: 3
+  ItemPrefab: {fileID: 7210936064020056518, guid: 650ec8b0d6603964eb5abf187c8759dc, type: 3}
+  Stackable: 1
+  MaxStack: 10
+  Effect: 20

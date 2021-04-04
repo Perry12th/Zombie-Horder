@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Health;
+using Character;
 
 namespace System.Health
 {
@@ -18,7 +18,7 @@ namespace System.Health
         // Start is called before the first frame update
         protected virtual void Start()
         {
-            CurrentHealth = TotalHealth;
+            CurrentHealth = TotalHealth;  
         }
 
         // Update is called once per frame
@@ -39,6 +39,14 @@ namespace System.Health
             if (CurrentHealth <= 0)
             {
                 Destroy();
+            }
+        }
+
+        public void HealPlayer(int effect)
+        {
+            if (CurrentHealth < MaxHealth)
+            {
+                CurrentHealth = Mathf.Clamp(CurrentHealth + effect, 0, MaxHealth);
             }
         }
     }
