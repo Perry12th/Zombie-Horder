@@ -30,4 +30,4 @@ MonoBehaviour:
     Repeating: 1
     WeaponHitLayers:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 55

@@ -2,6 +2,7 @@ using Character.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Health;
+using System;
 
 namespace Character
 {
@@ -28,6 +29,7 @@ namespace Character
         public bool IsReloading;
         public bool IsJumping;
         public bool IsRunning;
+        public bool InInventory;
 
         private void Awake()
         {
@@ -57,6 +59,34 @@ namespace Character
         public void OnUnPauseGame()
         {
             PauseManager.Instance.UnPauseGame();
+        }
+
+        public void OnInventory(InputValue Button)
+        {
+            if (InInventory)
+            {
+                InInventory = false;
+                OpenInventory(false);
+            }
+            else
+            {
+                InInventory = true;
+                OpenInventory(true);
+            }
+        }
+
+        private void OpenInventory(bool open)
+        {
+            if (open)
+            {
+                PauseManager.Instance.PauseGame();
+                GameUIController.EnableInventoryMenu();
+            }
+            else
+            {
+                PauseManager.Instance.UnPauseGame();
+                GameUIController.EnableGameMenu();
+            }
         }
 
         public void PauseGame()

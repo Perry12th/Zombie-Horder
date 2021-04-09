@@ -11,7 +11,7 @@ public class ItemPickUpComponent : MonoBehaviour
 
     [Tooltip("Manual Override for Drop Amount, if left at -1 it will use the amount from the scriptable object.")]
     [SerializeField]
-    private int Amount = -1;
+    private int Amount = 1;
 
     [SerializeField]
     private MeshRenderer meshRenderer;
@@ -53,7 +53,12 @@ public class ItemPickUpComponent : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         Debug.Log($"{ PickUpItem.name} - Picked Up");
 
-        ItemInstance.UseItem(other.GetComponent<PlayerController>());
+        InventoryComponent inventoryComponent = other.GetComponent<InventoryComponent>();
+
+        if (inventoryComponent)
+        {
+            inventoryComponent.AddItem(ItemInstance, Amount);
+        }
 
         Destroy(gameObject);
     }

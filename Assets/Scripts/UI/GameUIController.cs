@@ -8,6 +8,8 @@ public class GameUIController : MonoBehaviour
     private GameHUDWidget GameCanvas;
     [SerializeField]
     private GameHUDWidget PauseCanvas;
+    [SerializeField]
+    private GameHUDWidget InventoryCanvas;
 
     private GameHUDWidget ActiveMenu;
     // Start is called before the first frame update
@@ -40,10 +42,19 @@ public class GameUIController : MonoBehaviour
         ActiveMenu.EnableWidget();
     }
 
+    public void EnableInventoryMenu()
+    {
+        if (ActiveMenu) ActiveMenu.DisableWidget();
+
+        ActiveMenu = InventoryCanvas;
+        ActiveMenu.EnableWidget();
+    }
+
     public void DisableAllMenus()
     {
         GameCanvas.DisableWidget();
         PauseCanvas.DisableWidget();
+        InventoryCanvas.DisableWidget();
     }
 
     // Update is called once per frame
