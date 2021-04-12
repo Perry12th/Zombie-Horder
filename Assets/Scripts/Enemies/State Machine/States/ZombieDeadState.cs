@@ -7,7 +7,7 @@ public class ZombieDeadState : ZombieStates
     private static readonly int MovementZHash = Animator.StringToHash("MovementZ");
     private static readonly int DeadHash = Animator.StringToHash("IsDead");
 
-    public ZombieDeadState(ZombieComponment zombie, StateMachine stateMachine) : base(zombie, stateMachine)
+    public ZombieDeadState(ZombieComponment zombie, ZombieStateMachine stateMachine) : base(zombie, stateMachine)
     {
     }
 

@@ -1,11 +1,12 @@
-﻿public class ZombieStates : State
+﻿public class ZombieStates : State<ZombieStateType>
 {
     protected ZombieComponment OwnerZombie;
-    public ZombieStates(ZombieComponment zombie, StateMachine stateMachine) : base(stateMachine)
+    public ZombieStates(ZombieComponment zombie, ZombieStateMachine stateMachine) : base(stateMachine)
     {
         OwnerZombie = zombie;
     }
 }
+
 
 public enum ZombieStateType
 { 

@@ -3,10 +3,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Health;
 using System;
+using Weapons;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Character
 {
-    public class PlayerController : MonoBehaviour, IPausable
+    public class PlayerController : MonoBehaviour, IPausable, ISavable
     {
         public CrossHairScript CrossHair => CrossHairComponent;
         [SerializeField] private CrossHairScript CrossHairComponent;
@@ -108,5 +111,99 @@ namespace Character
                 PlayerInput.SwitchCurrentActionMap("PlayerActionMap");
             }
         }
+
+        public void OnSave(InputValue button)
+        {
+            SaveSystem.Instance.SaveGame();
+        }
+
+        public void OnLoad(InputValue button)
+        {
+            SaveSystem.Instance.LoadGame();
+        }
+
+
+        public SaveDataBase SaveData()
+        {
+            PlayerSaveData saveData = new PlayerSaveData()
+            {
+                Name = gameObject.name,
+                Position = transform.position,
+                Rotation = transform.rotation,
+                CurrentHealth = HealthComponent.Health,
+                EquippedWeaponData = new WeaponSaveData(WeaponHolder.CurrentWeapon.WeaponInformation),
+
+            };
+
+            var itemSaveList = Inventory.GetItemList().Select(item => new ItemSaveData(item)).ToList();
+            saveData.ItemList = itemSaveList;
+
+            return saveData;
+            
+        }
+
+        public void LoadData(SaveDataBase saveData)
+        {
+            PlayerSaveData playerSave = (PlayerSaveData)saveData;
+
+            if (playerSave == null) return;
+
+            Transform playerTransform = transform;
+            playerTransform.position = playerSave.Position;
+            playerTransform.rotation = playerSave.Rotation;
+
+            Health.SetCurrentHealth(playerSave.CurrentHealth);
+
+            foreach (ItemSaveData itemSave in playerSave.ItemList)
+            {
+                ItemScriptables item = InventoryRefecencer.Instance.GetItemReference(itemSave.Name);
+                Inventory.AddItem(item, itemSave.Amount);
+            }
+
+            WeaponScriptable weapon = (WeaponScriptable)(Inventory.FindItem(playerSave.EquippedWeaponData.Name));
+            weapon.WeaponStats = playerSave.EquippedWeaponData.WeaponStats;
+            WeaponHolder.EquipWeapon(weapon);
+        }
+
+        
+        [Serializable]
+        public class PlayerSaveData : SaveDataBase
+        {
+            public float CurrentHealth;
+            public Vector3 Position;
+            public Quaternion Rotation;
+            public WeaponSaveData EquippedWeaponData;
+            public List<ItemSaveData> ItemList;
+
+        }
+
+        [Serializable]
+        public class WeaponSaveData : SaveDataBase
+        {
+            
+            public WeaponStats WeaponStats;
+
+            public WeaponSaveData(WeaponStats weaponStats)
+            {
+                Name = WeaponStats.WeaponName;
+                WeaponStats = weaponStats;
+            }
+        }
+
+        [Serializable]
+        public class ItemSaveData : SaveDataBase
+        {
+            public int Amount;
+
+            public ItemSaveData(ItemScriptables item)
+            {
+                Name = item.name;
+                Amount = item.Amount;
+            }
+        }
+
+
     }
+
+
 }

@@ -11,7 +11,7 @@ public class ZombieAttackState : ZombieStates
     private static readonly int MovementZHash = Animator.StringToHash("MovementZ");
     private static readonly int AttackingHash = Animator.StringToHash("IsAttacking");
 
-    public ZombieAttackState(GameObject followTarrget, ZombieComponment zombie, StateMachine stateMachine) : base(zombie, stateMachine)
+    public ZombieAttackState(GameObject followTarrget, ZombieComponment zombie, ZombieStateMachine stateMachine) : base(zombie, stateMachine)
     {
         FollowTarget = followTarrget;
         UpdateInterval = 2.0f;

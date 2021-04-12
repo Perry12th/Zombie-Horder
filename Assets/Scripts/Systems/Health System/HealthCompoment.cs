@@ -49,5 +49,10 @@ namespace System.Health
                 CurrentHealth = Mathf.Clamp(CurrentHealth + effect, 0, MaxHealth);
             }
         }
+
+        public void SetCurrentHealth(float currentHealth)
+        {
+            CurrentHealth = currentHealth;
+        }
     }
 }

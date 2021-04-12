@@ -28,6 +28,7 @@ namespace Character
         
         //Ref
         private Camera ViewCamera;
+        public WeaponComponent CurrentWeapon => EquippedWeapon;
         private WeaponComponent EquippedWeapon;
         
         private static readonly int AimHorizontalHash = Animator.StringToHash("AimHorizontal");

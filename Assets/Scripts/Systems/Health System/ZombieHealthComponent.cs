@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Health;
 
-[RequireComponent(typeof(StateMachine))]
+[RequireComponent(typeof(ZombieStateMachine))]
 public class ZombieHealthComponent : HealthCompoment
 {
-    private StateMachine ZombieStateMachine;
+    private ZombieStateMachine ZombieStateMachine;
     // Start is called before the first frame update
     void Awake()
     {
-        ZombieStateMachine = GetComponent<StateMachine>();
+        ZombieStateMachine = GetComponent<ZombieStateMachine>();
     }
 
     public override void Destroy()
